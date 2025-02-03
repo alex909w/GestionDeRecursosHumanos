@@ -1,7 +1,8 @@
 package com.gestionrrhh.dao;
 
 import com.gestionrrhh.model.Cargos;
-import com.gestionrrhh.util.DatabaseUtil;
+import com.gestionrrhh.util.ConexionBD;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ public class CargosDAO {
         List<Cargos> cargos = new ArrayList<>();
         String sql = "SELECT * FROM Cargos";
 
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
 
@@ -38,7 +39,7 @@ public class CargosDAO {
     public boolean agregarCargo(Cargos cargo) {
         String sql = "INSERT INTO Cargos (cargo, descripcionCargo, jefatura) VALUES (?, ?, ?)";
 
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, cargo.getCargo());
@@ -57,7 +58,7 @@ public class CargosDAO {
     public boolean actualizarCargo(Cargos cargo) {
         String sql = "UPDATE Cargos SET cargo = ?, descripcionCargo = ?, jefatura = ? WHERE idCargo = ?";
 
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, cargo.getCargo());
@@ -77,7 +78,7 @@ public class CargosDAO {
     public boolean eliminarCargo(int idCargo) {
         String sql = "DELETE FROM Cargos WHERE idCargo = ?";
 
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, idCargo);
@@ -94,7 +95,7 @@ public class CargosDAO {
         Cargos cargo = null;
         String sql = "SELECT * FROM Cargos WHERE idCargo = ?";
 
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, idCargo);

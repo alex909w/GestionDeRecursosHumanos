@@ -2,6 +2,7 @@ package com.gestionrrhh.controller;
 
 import com.gestionrrhh.dao.EmpleadoDAO;
 import com.gestionrrhh.model.Empleado;
+
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -58,19 +59,15 @@ public class EmpleadoController extends HttpServlet {
         // Obtención de todos los empleados desde la base de datos
         List<Empleado> empleados = empleadoDAO.obtenerTodosLosEmpleados();
 
-        // Verificar si se cargaron empleados
-        if (empleados.isEmpty()) {
-            System.out.println("No se encontraron empleados.");
-        } else {
-            System.out.println("Se encontraron " + empleados.size() + " empleados.");
-            for (Empleado empleado : empleados) {
-                System.out.println("Empleado ID: " + empleado.getIdEmpleado() + ", Nombre: " + empleado.getNombre());
-            }
+        // Imprimir los empleados en la consola de NetBeans
+        System.out.println("=== Empleados cargados ===");
+        for (Empleado empleado : empleados) {
+            System.out.println("ID: " + empleado.getIdEmpleado() + ", Nombre: " + empleado.getNombre() + ", Apellido: " + empleado.getApellido());
         }
 
         // Pasamos la lista de empleados a la vista JSP
-        request.setAttribute("empleados", empleados);  // Pasamos los datos a la vista
-        request.getRequestDispatcher("/views/listarEmpleados.jsp").forward(request, response);  // Redirigimos a la vista JSP
+        request.setAttribute("empleados", empleados);
+        request.getRequestDispatcher("/views/listarEmpleados.jsp").forward(request, response);
     }
 
     private void mostrarFormularioAgregar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

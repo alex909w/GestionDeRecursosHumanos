@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class DatabaseUtilTest {
     public static void main(String[] args) {
-        try (Connection conn = DatabaseUtil.getConnection()) {
+        try (Connection conn = ConexionBD.getConnection()) {
             if (conn != null && !conn.isClosed()) {
                 System.out.println("Conexión exitosa a la base de datos.");
             } else {

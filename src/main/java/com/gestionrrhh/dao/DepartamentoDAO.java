@@ -1,7 +1,8 @@
 package com.gestionrrhh.dao;
 
 import com.gestionrrhh.model.Departamento;
-import com.gestionrrhh.util.DatabaseUtil;
+import com.gestionrrhh.util.ConexionBD;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ public class DepartamentoDAO {
         List<Departamento> departamentos = new ArrayList<>();
         String sql = "SELECT * FROM Departamento";
 
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
 
@@ -37,7 +38,7 @@ public class DepartamentoDAO {
     public boolean agregarDepartamento(Departamento departamento) {
         String sql = "INSERT INTO Departamento (nombreDepartamento, descripcionDepartamento) VALUES (?, ?)";
 
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, departamento.getNombreDepartamento());
@@ -55,7 +56,7 @@ public class DepartamentoDAO {
     public boolean actualizarDepartamento(Departamento departamento) {
         String sql = "UPDATE Departamento SET nombreDepartamento = ?, descripcionDepartamento = ? WHERE idDepartamento = ?";
 
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, departamento.getNombreDepartamento());
@@ -74,7 +75,7 @@ public class DepartamentoDAO {
     public boolean eliminarDepartamento(int idDepartamento) {
         String sql = "DELETE FROM Departamento WHERE idDepartamento = ?";
 
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, idDepartamento);
@@ -91,7 +92,7 @@ public class DepartamentoDAO {
         Departamento departamento = null;
         String sql = "SELECT * FROM Departamentos WHERE idDepartamento = ?";
 
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, idDepartamento);

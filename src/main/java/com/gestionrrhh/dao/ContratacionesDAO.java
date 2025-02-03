@@ -1,7 +1,8 @@
 package com.gestionrrhh.dao;
 
 import com.gestionrrhh.model.Contrataciones;
-import com.gestionrrhh.util.DatabaseUtil;
+import com.gestionrrhh.util.ConexionBD;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ public class ContratacionesDAO {
         List<Contrataciones> contrataciones = new ArrayList<>();
         String sql = "SELECT * FROM contrataciones";  // Cambié el nombre a minúsculas como en la base de datos.
 
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
 
@@ -42,7 +43,7 @@ public class ContratacionesDAO {
     public boolean agregarContratacion(Contrataciones contratacion) {
         String sql = "INSERT INTO contrataciones (idDepartamento, idEmpleado, idCargo, idTipoContratacion, fechaContratacion, salario, estado) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, contratacion.getIdDepartamento());
@@ -65,7 +66,7 @@ public class ContratacionesDAO {
     public boolean actualizarContratacion(Contrataciones contratacion) {
         String sql = "UPDATE contrataciones SET idDepartamento = ?, idEmpleado = ?, idCargo = ?, idTipoContratacion = ?, fechaContratacion = ?, salario = ?, estado = ? WHERE idContratacion = ?";
 
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, contratacion.getIdDepartamento());
@@ -89,7 +90,7 @@ public class ContratacionesDAO {
     public boolean eliminarContratacion(int idContratacion) {
         String sql = "DELETE FROM contrataciones WHERE idContratacion = ?";
 
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, idContratacion);
@@ -106,7 +107,7 @@ public class ContratacionesDAO {
         Contrataciones contratacion = null;
         String sql = "SELECT * FROM contrataciones WHERE idContratacion = ?";
 
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, idContratacion);

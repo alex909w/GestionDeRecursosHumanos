@@ -1,7 +1,8 @@
 package com.gestionrrhh.dao;
 
 import com.gestionrrhh.model.Empleado;
-import com.gestionrrhh.util.DatabaseUtil;
+import com.gestionrrhh.util.ConexionBD;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,9 +17,12 @@ public class EmpleadoDAO {
         List<Empleado> empleados = new ArrayList<>();
         String query = "SELECT * FROM empleados";  // Ajusta según la estructura de tu tabla
 
-        try (Connection conn = DatabaseUtil.getConnection();
-             PreparedStatement pst = conn.prepareStatement(query);
-             ResultSet rs = pst.executeQuery()) {
+        try (Connection conn = ConexionBD.getConnection(); PreparedStatement pst = conn.prepareStatement(query); ResultSet rs = pst.executeQuery()) {
+
+            // Verifica si hay resultados
+            if (!rs.isBeforeFirst()) {
+                System.out.println("No se encontraron empleados en la base de datos.");
+            }
 
             while (rs.next()) {
                 Empleado empleado = new Empleado();
@@ -30,12 +34,24 @@ public class EmpleadoDAO {
                 empleado.setDireccion(rs.getString("direccion"));
                 empleado.setTelefono(rs.getString("telefono"));
                 empleado.setCorreoElectronico(rs.getString("correoElectronico"));
+
                 empleados.add(empleado);
             }
         } catch (SQLException e) {
             System.out.println("Error al obtener empleados: " + e.getMessage());
-            e.printStackTrace();
+            e.printStackTrace();  // Imprime el stack trace para detalles completos
         }
+
+        // Imprimir empleados para depuración
+        if (empleados.isEmpty()) {
+            System.out.println("La lista de empleados está vacía.");
+        } else {
+            System.out.println("=== Empleados cargados ===");
+            for (Empleado empleado : empleados) {
+                System.out.println("ID: " + empleado.getIdEmpleado() + ", Nombre: " + empleado.getNombre() + ", Apellido: " + empleado.getApellido());
+            }
+        }
+
         return empleados;
     }
 
@@ -43,8 +59,7 @@ public class EmpleadoDAO {
     public boolean agregarEmpleado(Empleado empleado) {
         String sql = "INSERT INTO empleados (nombre, apellido, fechaNacimiento, genero, direccion, telefono, correoElectronico) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = DatabaseUtil.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = ConexionBD.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, empleado.getNombre());
             pstmt.setString(2, empleado.getApellido());
@@ -57,7 +72,6 @@ public class EmpleadoDAO {
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println("Error al agregar empleado: " + e.getMessage());
-            e.printStackTrace();
             return false;
         }
     }
@@ -66,8 +80,7 @@ public class EmpleadoDAO {
     public boolean actualizarEmpleado(Empleado empleado) {
         String sql = "UPDATE empleados SET nombre = ?, apellido = ?, fechaNacimiento = ?, genero = ?, direccion = ?, telefono = ?, correoElectronico = ? WHERE idEmpleado = ?";
 
-        try (Connection conn = DatabaseUtil.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = ConexionBD.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, empleado.getNombre());
             pstmt.setString(2, empleado.getApellido());
@@ -81,7 +94,6 @@ public class EmpleadoDAO {
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println("Error al actualizar empleado: " + e.getMessage());
-            e.printStackTrace();
             return false;
         }
     }
@@ -90,14 +102,12 @@ public class EmpleadoDAO {
     public boolean eliminarEmpleado(int idEmpleado) {
         String sql = "DELETE FROM empleados WHERE idEmpleado = ?";
 
-        try (Connection conn = DatabaseUtil.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = ConexionBD.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, idEmpleado);
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println("Error al eliminar empleado: " + e.getMessage());
-            e.printStackTrace();
             return false;
         }
     }
@@ -107,8 +117,7 @@ public class EmpleadoDAO {
         Empleado empleado = null;
         String sql = "SELECT * FROM empleados WHERE idEmpleado = ?";
 
-        try (Connection conn = DatabaseUtil.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = ConexionBD.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, idEmpleado);
             try (ResultSet rs = pstmt.executeQuery()) {
@@ -126,7 +135,6 @@ public class EmpleadoDAO {
             }
         } catch (SQLException e) {
             System.out.println("Error al obtener empleado por ID: " + e.getMessage());
-            e.printStackTrace();
         }
         return empleado;
     }

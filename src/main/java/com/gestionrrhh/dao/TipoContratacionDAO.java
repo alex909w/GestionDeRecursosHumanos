@@ -1,7 +1,8 @@
 package com.gestionrrhh.dao;
 
 import com.gestionrrhh.model.TipoContratacion;
-import com.gestionrrhh.util.DatabaseUtil;
+import com.gestionrrhh.util.ConexionBD;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ public class TipoContratacionDAO {
         List<TipoContratacion> tiposContratacion = new ArrayList<>();
         String sql = "SELECT * FROM TipoContratacion";
 
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
 
@@ -36,7 +37,7 @@ public class TipoContratacionDAO {
     public boolean agregarTipoContratacion(TipoContratacion tipoContratacion) {
         String sql = "INSERT INTO TipoContratacion (tipoContratacion) VALUES (?)";
 
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, tipoContratacion.getTipoContratacion());
@@ -53,7 +54,7 @@ public class TipoContratacionDAO {
     public boolean actualizarTipoContratacion(TipoContratacion tipoContratacion) {
         String sql = "UPDATE TipoContratacion SET tipoContratacion = ? WHERE idTipoContratacion = ?";
 
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, tipoContratacion.getTipoContratacion());
@@ -71,7 +72,7 @@ public class TipoContratacionDAO {
     public boolean eliminarTipoContratacion(int idTipoContratacion) {
         String sql = "DELETE FROM TipoContratacion WHERE idTipoContratacion = ?";
 
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, idTipoContratacion);
@@ -88,7 +89,7 @@ public class TipoContratacionDAO {
         TipoContratacion tipoContratacion = null;
         String sql = "SELECT * FROM TipoContratacion WHERE idTipoContratacion = ?";
 
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, idTipoContratacion);

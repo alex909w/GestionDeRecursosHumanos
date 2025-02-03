@@ -2,6 +2,7 @@ package com.gestionrrhh.controller;
 
 import com.gestionrrhh.dao.CargosDAO;
 import com.gestionrrhh.model.Cargos;
+
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;

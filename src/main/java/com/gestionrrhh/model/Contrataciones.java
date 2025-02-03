@@ -10,7 +10,7 @@ public class Contrataciones {
     private int idTipoContratacion;
     private Date fechaContratacion;
     private double salario;
-    private boolean estado;  
+    private boolean estado;
 
     // Getters y Setters
     public int getIdContratacion() {
