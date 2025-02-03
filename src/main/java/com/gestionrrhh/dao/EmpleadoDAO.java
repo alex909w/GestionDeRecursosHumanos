@@ -15,14 +15,8 @@ public class EmpleadoDAO {
     // Método para obtener todos los empleados
     public List<Empleado> obtenerTodosLosEmpleados() {
         List<Empleado> empleados = new ArrayList<>();
-        String query = "SELECT * FROM empleados";  // Ajusta según la estructura de tu tabla
-
+        String query = "SELECT * FROM empleados";
         try (Connection conn = ConexionBD.getConnection(); PreparedStatement pst = conn.prepareStatement(query); ResultSet rs = pst.executeQuery()) {
-
-            // Verifica si hay resultados
-            if (!rs.isBeforeFirst()) {
-                System.out.println("No se encontraron empleados en la base de datos.");
-            }
 
             while (rs.next()) {
                 Empleado empleado = new Empleado();
@@ -34,24 +28,11 @@ public class EmpleadoDAO {
                 empleado.setDireccion(rs.getString("direccion"));
                 empleado.setTelefono(rs.getString("telefono"));
                 empleado.setCorreoElectronico(rs.getString("correoElectronico"));
-
                 empleados.add(empleado);
             }
         } catch (SQLException e) {
             System.out.println("Error al obtener empleados: " + e.getMessage());
-            e.printStackTrace();  // Imprime el stack trace para detalles completos
         }
-
-        // Imprimir empleados para depuración
-        if (empleados.isEmpty()) {
-            System.out.println("La lista de empleados está vacía.");
-        } else {
-            System.out.println("=== Empleados cargados ===");
-            for (Empleado empleado : empleados) {
-                System.out.println("ID: " + empleado.getIdEmpleado() + ", Nombre: " + empleado.getNombre() + ", Apellido: " + empleado.getApellido());
-            }
-        }
-
         return empleados;
     }
 
