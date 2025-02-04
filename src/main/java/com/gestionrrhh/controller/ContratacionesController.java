@@ -2,6 +2,10 @@ package com.gestionrrhh.controller;
 
 import com.gestionrrhh.dao.ContratacionesDAO;
 import com.gestionrrhh.model.Contrataciones;
+import com.gestionrrhh.model.Departamento;
+import com.gestionrrhh.model.Empleado;
+import com.gestionrrhh.model.TipoContratacion;
+import com.gestionrrhh.model.Cargo;
 
 import java.io.IOException;
 import java.util.List;
@@ -57,18 +61,77 @@ public class ContratacionesController extends HttpServlet {
 
     private void listarContrataciones(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Contrataciones> contrataciones = contratacionesDAO.obtenerTodasLasContrataciones();
+
+        // Cargar los nombres de departamentos, empleados, cargos y tipos de contratación para cada contratacion
+        for (Contrataciones contratacion : contrataciones) {
+            String nombreDepartamento = contratacionesDAO.obtenerNombreDepartamento(contratacion.getIdDepartamento());
+            String nombreEmpleado = contratacionesDAO.obtenerNombreEmpleado(contratacion.getIdEmpleado());
+            String nombreCargo = contratacionesDAO.obtenerNombreCargo(contratacion.getIdCargo());
+            String tipoContratacion = contratacionesDAO.obtenerTipoContratacion(contratacion.getIdTipoContratacion());
+
+            // Asignar los nombres a la contratacion
+            contratacion.setNombreDepartamento(nombreDepartamento);
+            contratacion.setNombreEmpleado(nombreEmpleado);
+            contratacion.setNombreCargo(nombreCargo);
+            contratacion.setTipoContratacion(tipoContratacion);
+        }
+
+        // Pasar la lista de contrataciones al request
         request.setAttribute("contrataciones", contrataciones);
+
+        // Mostrar la vista de lista de contrataciones
         request.getRequestDispatcher("/views/listarContrataciones.jsp").forward(request, response);
     }
 
     private void mostrarFormularioAgregar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Obtener las listas de departamentos, empleados, cargos y tipos de contratación
+        List<Departamento> departamentos = contratacionesDAO.obtenerTodosDepartamentos();
+        List<Empleado> empleados = contratacionesDAO.obtenerTodosEmpleados();
+        List<Cargo> cargos = contratacionesDAO.obtenerTodosCargos();
+        List<TipoContratacion> tiposContratacion = contratacionesDAO.obtenerTodosTiposContratacion();
+
+        // Pasar los datos al request para que estén disponibles en el JSP
+        request.setAttribute("departamentos", departamentos);
+        request.setAttribute("empleados", empleados);
+        request.setAttribute("cargos", cargos);
+        request.setAttribute("tiposContratacion", tiposContratacion);
+
+        // Redirigir a la vista de agregar
         request.getRequestDispatcher("/views/agregarContratacion.jsp").forward(request, response);
     }
 
     private void mostrarFormularioEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idContratacion = Integer.parseInt(request.getParameter("idContratacion"));
+
+        // Obtener la contratación por ID
         Contrataciones contratacion = contratacionesDAO.obtenerContratacionPorId(idContratacion);
+
+        // Obtener los nombres de las entidades asociadas
+        String nombreDepartamento = contratacionesDAO.obtenerNombreDepartamento(contratacion.getIdDepartamento());
+        String nombreEmpleado = contratacionesDAO.obtenerNombreEmpleado(contratacion.getIdEmpleado());
+        String nombreCargo = contratacionesDAO.obtenerNombreCargo(contratacion.getIdCargo());
+        String tipoContratacion = contratacionesDAO.obtenerTipoContratacion(contratacion.getIdTipoContratacion());
+
+        // Asignar los nombres al objeto contratacion
+        contratacion.setNombreDepartamento(nombreDepartamento);
+        contratacion.setNombreEmpleado(nombreEmpleado);
+        contratacion.setNombreCargo(nombreCargo);
+        contratacion.setTipoContratacion(tipoContratacion);
+
+        // Obtener las listas de departamentos, empleados, cargos y tipos de contratación
+        List<Departamento> departamentos = contratacionesDAO.obtenerTodosDepartamentos();
+        List<Empleado> empleados = contratacionesDAO.obtenerTodosEmpleados();
+        List<Cargo> cargos = contratacionesDAO.obtenerTodosCargos();
+        List<TipoContratacion> tiposContratacion = contratacionesDAO.obtenerTodosTiposContratacion();
+
+        // Pasar los datos al request para que estén disponibles en el JSP
         request.setAttribute("contratacion", contratacion);
+        request.setAttribute("departamentos", departamentos);
+        request.setAttribute("empleados", empleados);
+        request.setAttribute("cargos", cargos);
+        request.setAttribute("tiposContratacion", tiposContratacion);
+
+        // Redirigir a la vista de edición
         request.getRequestDispatcher("/views/editarContratacion.jsp").forward(request, response);
     }
 
@@ -80,7 +143,7 @@ public class ContratacionesController extends HttpServlet {
         contratacion.setIdTipoContratacion(Integer.parseInt(request.getParameter("idTipoContratacion")));
         contratacion.setFechaContratacion(java.sql.Date.valueOf(request.getParameter("fechaContratacion")));
         contratacion.setSalario(Double.parseDouble(request.getParameter("salario")));
-        contratacion.setEstado(Boolean.parseBoolean(request.getParameter("estado")));  // Usamos 'estado' ahora en lugar de 'gestado'.
+        contratacion.setEstado(Boolean.parseBoolean(request.getParameter("estado")));
 
         contratacionesDAO.agregarContratacion(contratacion);
         response.sendRedirect("contrataciones");
@@ -96,7 +159,7 @@ public class ContratacionesController extends HttpServlet {
         contratacion.setIdTipoContratacion(Integer.parseInt(request.getParameter("idTipoContratacion")));
         contratacion.setFechaContratacion(java.sql.Date.valueOf(request.getParameter("fechaContratacion")));
         contratacion.setSalario(Double.parseDouble(request.getParameter("salario")));
-        contratacion.setEstado(Boolean.parseBoolean(request.getParameter("estado")));  // Usamos 'estado' ahora en lugar de 'gestado'.
+        contratacion.setEstado(Boolean.parseBoolean(request.getParameter("estado")));
 
         contratacionesDAO.actualizarContratacion(contratacion);
         response.sendRedirect("contrataciones");

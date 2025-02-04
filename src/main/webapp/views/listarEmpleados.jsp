@@ -15,12 +15,10 @@
             <h1 class="fw-bold">Lista de Empleados</h1>
         </div>
         <div class="container mt-5">
-            <!-- Botón para regresar al menú principal -->
-            <a href="index.jsp" class="btn btn-secondary mb-3 btn-lg">Volver al Menú Principal</a>
-
             <!-- Botón para agregar nuevo empleado -->
             <a href="empleados?action=agregar" class="btn btn-success mb-3 btn-lg">Agregar Empleado</a>
-
+            <!-- Botón para regresar al menú principal -->
+            <a href="index.jsp" class="btn btn-secondary mb-3 btn-lg">Volver al Menú Principal</a>
             <!-- Tabla de Empleados -->
             <table class="table table-bordered table-striped">
                 <thead>

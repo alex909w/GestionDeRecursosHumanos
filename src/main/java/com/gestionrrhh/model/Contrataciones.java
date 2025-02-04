@@ -12,6 +12,12 @@ public class Contrataciones {
     private double salario;
     private boolean estado;
 
+    // Campos adicionales para los nombres
+    private String nombreEmpleado;
+    private String nombreDepartamento;
+    private String nombreCargo;
+    private String tipoContratacion;
+
     // Getters y Setters
     public int getIdContratacion() {
         return idContratacion;
@@ -75,5 +81,38 @@ public class Contrataciones {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+    // Getters y Setters para los campos adicionales
+    public String getNombreEmpleado() {
+        return nombreEmpleado;
+    }
+
+    public void setNombreEmpleado(String nombreEmpleado) {
+        this.nombreEmpleado = nombreEmpleado;
+    }
+
+    public String getNombreDepartamento() {
+        return nombreDepartamento;
+    }
+
+    public void setNombreDepartamento(String nombreDepartamento) {
+        this.nombreDepartamento = nombreDepartamento;
+    }
+
+    public String getNombreCargo() {
+        return nombreCargo;
+    }
+
+    public void setNombreCargo(String nombreCargo) {
+        this.nombreCargo = nombreCargo;
+    }
+
+    public String getTipoContratacion() {
+        return tipoContratacion;
+    }
+
+    public void setTipoContratacion(String tipoContratacion) {
+        this.tipoContratacion = tipoContratacion;
     }
 }

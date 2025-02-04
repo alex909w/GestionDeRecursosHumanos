@@ -1,6 +1,6 @@
 package com.gestionrrhh.model;
 
-public class Cargos {
+public class Cargo {
     private int idCargo;
     private String cargo;
     private String descripcionCargo;

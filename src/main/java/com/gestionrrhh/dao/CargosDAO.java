@@ -1,6 +1,6 @@
 package com.gestionrrhh.dao;
 
-import com.gestionrrhh.model.Cargos;
+import com.gestionrrhh.model.Cargo;
 import com.gestionrrhh.util.ConexionBD;
 
 import java.sql.Connection;
@@ -13,8 +13,8 @@ import java.util.List;
 public class CargosDAO {
 
     // Método para obtener todos los cargos
-    public List<Cargos> obtenerTodosLosCargos() {
-        List<Cargos> cargos = new ArrayList<>();
+    public List<Cargo> obtenerTodosLosCargos() {
+        List<Cargo> cargos = new ArrayList<>();
         String sql = "SELECT * FROM Cargos";
 
         try (Connection conn = ConexionBD.getConnection();
@@ -22,7 +22,7 @@ public class CargosDAO {
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
-                Cargos cargo = new Cargos();
+                Cargo cargo = new Cargo();
                 cargo.setIdCargo(rs.getInt("idCargo"));
                 cargo.setCargo(rs.getString("cargo"));
                 cargo.setDescripcionCargo(rs.getString("descripcionCargo"));
@@ -36,7 +36,7 @@ public class CargosDAO {
     }
 
     // Método para agregar un cargo
-    public boolean agregarCargo(Cargos cargo) {
+    public boolean agregarCargo(Cargo cargo) {
         String sql = "INSERT INTO Cargos (cargo, descripcionCargo, jefatura) VALUES (?, ?, ?)";
 
         try (Connection conn = ConexionBD.getConnection();
@@ -55,7 +55,7 @@ public class CargosDAO {
     }
 
     // Método para actualizar un cargo
-    public boolean actualizarCargo(Cargos cargo) {
+    public boolean actualizarCargo(Cargo cargo) {
         String sql = "UPDATE Cargos SET cargo = ?, descripcionCargo = ?, jefatura = ? WHERE idCargo = ?";
 
         try (Connection conn = ConexionBD.getConnection();
@@ -91,8 +91,8 @@ public class CargosDAO {
     }
 
     // Método para obtener un cargo por su ID
-    public Cargos obtenerCargoPorId(int idCargo) {
-        Cargos cargo = null;
+    public Cargo obtenerCargoPorId(int idCargo) {
+        Cargo cargo = null;
         String sql = "SELECT * FROM Cargos WHERE idCargo = ?";
 
         try (Connection conn = ConexionBD.getConnection();
@@ -101,7 +101,7 @@ public class CargosDAO {
             pstmt.setInt(1, idCargo);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    cargo = new Cargos();
+                    cargo = new Cargo();
                     cargo.setIdCargo(rs.getInt("idCargo"));
                     cargo.setCargo(rs.getString("cargo"));
                     cargo.setDescripcionCargo(rs.getString("descripcionCargo"));

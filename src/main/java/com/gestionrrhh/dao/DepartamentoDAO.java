@@ -90,7 +90,7 @@ public class DepartamentoDAO {
     // Método para obtener un departamento por su ID
     public Departamento obtenerDepartamentoPorId(int idDepartamento) {
         Departamento departamento = null;
-        String sql = "SELECT * FROM Departamentos WHERE idDepartamento = ?";
+        String sql = "SELECT * FROM Departamento WHERE idDepartamento = ?";
 
         try (Connection conn = ConexionBD.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

@@ -1,7 +1,7 @@
 package com.gestionrrhh.controller;
 
 import com.gestionrrhh.dao.CargosDAO;
-import com.gestionrrhh.model.Cargos;
+import com.gestionrrhh.model.Cargo;
 
 import java.io.IOException;
 import java.util.List;
@@ -56,7 +56,7 @@ public class CargosController extends HttpServlet {
     }
 
     private void listarCargos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Cargos> cargos = cargosDAO.obtenerTodosLosCargos();
+        List<Cargo> cargos = cargosDAO.obtenerTodosLosCargos();
         request.setAttribute("cargos", cargos);
         request.getRequestDispatcher("/views/listarCargos.jsp").forward(request, response);
     }
@@ -67,13 +67,13 @@ public class CargosController extends HttpServlet {
 
     private void mostrarFormularioEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idCargo = Integer.parseInt(request.getParameter("idCargo"));
-        Cargos cargo = cargosDAO.obtenerCargoPorId(idCargo);
+        Cargo cargo = cargosDAO.obtenerCargoPorId(idCargo);
         request.setAttribute("cargo", cargo);
         request.getRequestDispatcher("/views/editarCargo.jsp").forward(request, response);
     }
 
     private void agregarCargo(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Cargos cargo = new Cargos();
+        Cargo cargo = new Cargo();
         cargo.setCargo(request.getParameter("cargo"));
         cargo.setDescripcionCargo(request.getParameter("descripcionCargo"));
         cargo.setJefatura(Boolean.parseBoolean(request.getParameter("jefatura")));
@@ -84,7 +84,7 @@ public class CargosController extends HttpServlet {
 
     private void actualizarCargo(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int idCargo = Integer.parseInt(request.getParameter("idCargo"));
-        Cargos cargo = new Cargos();
+        Cargo cargo = new Cargo();
         cargo.setIdCargo(idCargo);
         cargo.setCargo(request.getParameter("cargo"));
         cargo.setDescripcionCargo(request.getParameter("descripcionCargo"));
