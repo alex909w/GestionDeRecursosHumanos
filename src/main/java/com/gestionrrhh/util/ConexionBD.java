@@ -5,19 +5,23 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConexionBD {
-
-    // URL de conexión con MySQL, cambiamos el parámetro 'useSSL' a false para evitar advertencias de SSL.
     private static final String URL = "jdbc:mysql://localhost:3306/gestorcontrataciones?useSSL=false&serverTimezone=UTC";
-    private static final String USER = "root";  // Usuario de MySQL
-    private static final String PASSWORD = "";  // Contraseña del usuario (deja vacío si no tienes)
+    private static final String USUARIO = "root";
+    private static final String PASSWORD = "";
 
-    // Método para obtener la conexión
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection() {
+        Connection conn = null;
         try {
-            // Establece la conexión a la base de datos
-            return DriverManager.getConnection(URL, USER, PASSWORD);
+            Class.forName("com.mysql.cj.jdbc.Driver"); // Asegura que el driver está disponible
+            conn = DriverManager.getConnection(URL, USUARIO, PASSWORD);
+            System.out.println("✅ Conexión establecida con la base de datos.");
+        } catch (ClassNotFoundException e) {
+            System.err.println("❌ Error: No se encontró el driver de MySQL.");
+            e.printStackTrace();
         } catch (SQLException e) {
-            throw new SQLException("Error al conectar con la base de datos: " + e.getMessage(), e);
+            System.err.println("❌ Error al conectar a la base de datos: " + e.getMessage());
+            e.printStackTrace();
         }
+        return conn;
     }
 }
