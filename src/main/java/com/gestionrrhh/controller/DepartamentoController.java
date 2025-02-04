@@ -82,6 +82,9 @@ public class DepartamentoController extends HttpServlet {
                 return;
             }
 
+            // Verifica que el departamento tiene la descripción correctamente cargada
+            System.out.println("Descripcion Departamento: " + departamento.getDescripcionDepartamento()); // Depuración
+
             // Pasa el objeto Departamento al JSP
             request.setAttribute("departamento", departamento);
             request.getRequestDispatcher("/views/editarDepartamento.jsp").forward(request, response);

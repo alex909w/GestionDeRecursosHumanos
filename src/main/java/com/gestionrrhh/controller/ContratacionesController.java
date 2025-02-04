@@ -106,18 +106,6 @@ public class ContratacionesController extends HttpServlet {
         // Obtener la contratación por ID
         Contrataciones contratacion = contratacionesDAO.obtenerContratacionPorId(idContratacion);
 
-        // Obtener los nombres de las entidades asociadas
-        String nombreDepartamento = contratacionesDAO.obtenerNombreDepartamento(contratacion.getIdDepartamento());
-        String nombreEmpleado = contratacionesDAO.obtenerNombreEmpleado(contratacion.getIdEmpleado());
-        String nombreCargo = contratacionesDAO.obtenerNombreCargo(contratacion.getIdCargo());
-        String tipoContratacion = contratacionesDAO.obtenerTipoContratacion(contratacion.getIdTipoContratacion());
-
-        // Asignar los nombres al objeto contratacion
-        contratacion.setNombreDepartamento(nombreDepartamento);
-        contratacion.setNombreEmpleado(nombreEmpleado);
-        contratacion.setNombreCargo(nombreCargo);
-        contratacion.setTipoContratacion(tipoContratacion);
-
         // Obtener las listas de departamentos, empleados, cargos y tipos de contratación
         List<Departamento> departamentos = contratacionesDAO.obtenerTodosDepartamentos();
         List<Empleado> empleados = contratacionesDAO.obtenerTodosEmpleados();

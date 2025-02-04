@@ -28,7 +28,7 @@
                 <div class="form-group">
                     <label for="descripcionDepartamento">Descripción:</label>
                     <textarea class="form-control" id="descripcionDepartamento" name="descripcionDepartamento" required>
-                        ${departamento.descripcionDepartamento}
+                        ${departamento.descripcionDepartamento != null ? departamento.descripcionDepartamento : ''}
                     </textarea>
                 </div>
 
