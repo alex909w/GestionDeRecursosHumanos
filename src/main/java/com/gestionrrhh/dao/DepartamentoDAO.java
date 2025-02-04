@@ -101,7 +101,7 @@ public class DepartamentoDAO {
                     departamento = new Departamento();
                     departamento.setIdDepartamento(rs.getInt("idDepartamento"));
                     departamento.setNombreDepartamento(rs.getString("nombreDepartamento"));
-                    // Si hay más columnas, agrega los setters correspondientes
+                    departamento.setDescripcionDepartamento(rs.getString("descripcionDepartamento")); 
                 }
             }
         } catch (SQLException e) {
