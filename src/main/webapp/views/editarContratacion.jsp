@@ -107,5 +107,12 @@
                 <p>© 2025 Gestión RRHH. Todos los derechos reservados.</p>
             </div>
         </footer>
+
+        <script>
+            const fechaContratacion = document.getElementById('fechaContratacion');
+            const fechaActual = new Date().toISOString().split('T')[0]; // Obtiene la fecha actual en formato YYYY-MM-DD
+            fechaContratacion.max = fechaActual;
+        </script>
+
     </body>
 </html>
