@@ -21,7 +21,8 @@
 
                 <div class="form-group">
                     <label for="cargo">Cargo:</label>
-                    <input type="text" class="form-control" id="cargo" name="cargo" value="${cargo.cargo}" required>
+                    <input type="text" class="form-control" id="cargo" name="cargo" value="${cargo.cargo}"
+                           pattern="[A-Za-z\s]+" title="Solo se permiten letras y espacios" required>
                 </div>
 
                 <div class="form-group">

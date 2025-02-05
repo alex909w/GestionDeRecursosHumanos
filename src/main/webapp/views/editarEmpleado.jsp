@@ -21,17 +21,20 @@
 
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" value="${empleado.nombre}" required>
+                    <input type="text" class="form-control" id="nombre" name="nombre" value="${empleado.nombre}"
+                           pattern="[A-Za-z\s]+" title="Solo se permiten letras y espacios" required>
                 </div>
 
                 <div class="form-group">
                     <label for="apellido">Apellido:</label>
-                    <input type="text" class="form-control" id="apellido" name="apellido" value="${empleado.apellido}" required>
+                    <input type="text" class="form-control" id="apellido" name="apellido" value="${empleado.apellido}"
+                           pattern="[A-Za-z\s]+" title="Solo se permiten letras y espacios" required>
                 </div>
 
                 <div class="form-group">
                     <label for="telefono">Teléfono:</label>
-                    <input type="text" class="form-control" id="telefono" name="telefono" value="${empleado.telefono}" required>
+                    <input type="tel" class="form-control" id="telefono" name="telefono" value="${empleado.telefono}"
+                           pattern="^[0-9-]+$" title="Solo se permiten numeros y un guion" required>
                 </div>
 
                 <div class="form-group">
@@ -70,5 +73,12 @@
                 <p>© 2025 Gestión RRHH. Todos los derechos reservados.</p>
             </div>
         </footer>
+
+        <script>
+            const fechaNacimiento = document.getElementById('fechaNacimiento');
+            const fechaActual = new Date().toISOString().split('T')[0]; // Obtiene la fecha actual en formato YYYY-MM-DD
+            fechaNacimiento.max = fechaActual;
+        </script>
+
     </body>
 </html>

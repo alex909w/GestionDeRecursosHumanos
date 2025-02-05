@@ -22,7 +22,8 @@
                 <div class="form-group">
                     <label for="tipoContratacion">Tipo de Contratación:</label>
                     <input type="text" class="form-control" id="tipoContratacion" name="tipoContratacion"
-                           value="${tipoContratacion.tipoContratacion}" required>
+                           value="${tipoContratacion.tipoContratacion}"
+                           pattern="[A-Za-z\s]+" title="Solo se permiten letras y espacios" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-lg">Actualizar</button>

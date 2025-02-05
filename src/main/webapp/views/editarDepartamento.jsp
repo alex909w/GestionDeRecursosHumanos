@@ -22,7 +22,8 @@
                 <div class="form-group">
                     <label for="nombreDepartamento">Nombre:</label>
                     <input type="text" class="form-control" id="nombreDepartamento" name="nombreDepartamento" 
-                           value="${departamento.nombreDepartamento}" required>
+                           value="${departamento.nombreDepartamento}" pattern="[A-Za-z\s]+"
+                           title="Solo se permiten letras y espacios" required>
                 </div>
 
                 <div class="form-group">

@@ -66,7 +66,7 @@
 
             <div class="form-group">
                 <label for="salario">Salario:</label>
-                <input type="number" step="0.01" class="form-control" id="salario" name="salario" required>
+                <input type="number" step="0.01" class="form-control" id="salario" name="salario" min="0" required>
             </div>
 
             <div class="form-group">
@@ -90,5 +90,11 @@
             <p>© 2025 Gestión RRHH. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <script>
+        const fechaContratacion = document.getElementById('fechaContratacion');
+        const fechaActual = new Date().toISOString().split('T')[0]; // Obtiene la fecha actual en formato YYYY-MM-DD
+        fechaContratacion.max = fechaActual;
+    </script>
 </body>
 </html>
