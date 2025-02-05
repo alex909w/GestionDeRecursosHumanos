@@ -19,7 +19,8 @@
                 <input type="hidden" name="action" value="agregar">
                 <div class="form-group">
                     <label for="tipoContratacion">Tipo de Contratación:</label>
-                    <input type="text" class="form-control" id="tipoContratacion" name="tipoContratacion" required>
+                    <input type="text" class="form-control" id="tipoContratacion" name="tipoContratacion"
+                           pattern="[A-Za-z\s]+" title="Solo se permiten letras y espacios" required>
                 </div>
                 <button type="submit" class="btn btn-primary btn-lg">Agregar</button>
                 <a href="tiposcontratacion" class="btn btn-secondary btn-lg">Volver a la Página Anterior</a>
