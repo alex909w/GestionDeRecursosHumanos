@@ -45,7 +45,6 @@
                     <select class="form-control" id="genero" name="genero" required>
                         <option value="M">Masculino</option>
                         <option value="F">Femenino</option>
-                        <option value="O">Otro</option>
                     </select>
                 </div>
                 <div class="form-group">
