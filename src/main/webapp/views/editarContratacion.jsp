@@ -83,7 +83,7 @@
                 <div class="form-group">
                     <label for="salario">Salario:</label>
                     <input type="number" step="0.01" class="form-control" id="salario" name="salario"
-                           value="${contratacion.salario}" required>
+                           value="${contratacion.salario}" min="0" required>
                 </div>
 
                 <!-- Estado -->
