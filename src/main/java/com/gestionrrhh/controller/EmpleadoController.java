@@ -100,7 +100,10 @@ public class EmpleadoController extends HttpServlet {
         empleado.setCorreoElectronico(request.getParameter("correoElectronico"));
 
         if (empleadoDAO.agregarEmpleado(empleado)) {
-            response.sendRedirect("empleados");  // Redirigir al servlet para refrescar la lista
+            int idEmpleado = empleado.getIdEmpleado(); // Asegúrate de que tu DAO devuelva el ID generado
+        
+        // Redirigir al formulario de contratación con el ID del empleado
+            response.sendRedirect("contrataciones?action=agregar&idEmpleado=" + idEmpleado);  // Redirigir al servlet para refrescar la lista
         } else {
             response.sendRedirect("error.jsp");  // Si hay error, redirigir a error.jsp
         }

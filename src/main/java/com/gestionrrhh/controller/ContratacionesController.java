@@ -83,22 +83,33 @@ public class ContratacionesController extends HttpServlet {
         request.getRequestDispatcher("/views/listarContrataciones.jsp").forward(request, response);
     }
 
-    private void mostrarFormularioAgregar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Obtener las listas de departamentos, empleados, cargos y tipos de contratación
-        List<Departamento> departamentos = contratacionesDAO.obtenerTodosDepartamentos();
-        List<Empleado> empleados = contratacionesDAO.obtenerTodosEmpleados();
-        List<Cargo> cargos = contratacionesDAO.obtenerTodosCargos();
-        List<TipoContratacion> tiposContratacion = contratacionesDAO.obtenerTodosTiposContratacion();
+private void mostrarFormularioAgregar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // Obtener las listas de departamentos, empleados, cargos y tipos de contratación
+    List<Departamento> departamentos = contratacionesDAO.obtenerTodosDepartamentos();
+    List<Empleado> empleados = contratacionesDAO.obtenerTodosEmpleados();
+    List<Cargo> cargos = contratacionesDAO.obtenerTodosCargos();
+    List<TipoContratacion> tiposContratacion = contratacionesDAO.obtenerTodosTiposContratacion();
 
-        // Pasar los datos al request para que estén disponibles en el JSP
-        request.setAttribute("departamentos", departamentos);
-        request.setAttribute("empleados", empleados);
-        request.setAttribute("cargos", cargos);
-        request.setAttribute("tiposContratacion", tiposContratacion);
-
-        // Redirigir a la vista de agregar
-        request.getRequestDispatcher("/views/agregarContratacion.jsp").forward(request, response);
+    // Obtener el ID del empleado si se proporcionó
+    String idEmpleadoStr = request.getParameter("idEmpleado");
+    if (idEmpleadoStr != null && !idEmpleadoStr.isEmpty()) {
+        try {
+            int idEmpleado = Integer.parseInt(idEmpleadoStr);
+            request.setAttribute("idEmpleadoSeleccionado", idEmpleado);
+        } catch (NumberFormatException e) {
+            // Manejar error si es necesario
+        }
     }
+
+    // Pasar los datos al request para que estén disponibles en el JSP
+    request.setAttribute("departamentos", departamentos);
+    request.setAttribute("empleados", empleados);
+    request.setAttribute("cargos", cargos);
+    request.setAttribute("tiposContratacion", tiposContratacion);
+
+    // Redirigir a la vista de agregar
+    request.getRequestDispatcher("/views/agregarContratacion.jsp").forward(request, response);
+}
 
     private void mostrarFormularioEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idContratacion = Integer.parseInt(request.getParameter("idContratacion"));

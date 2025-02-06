@@ -63,18 +63,6 @@
                     </a>
                 </div>
 
-                <!-- Gestión de Tipos de Contratación -->
-                <div class="col-md-4">
-                    <a href="tiposcontratacion" class="text-decoration-none">
-                        <div class="card card-custom shadow-sm p-3">
-                            <div class="card-body text-center">
-                                <i class="bi bi-clipboard-check fs-1 text-warning"></i>
-                                <h5 class="card-title mt-3">Tipos de Contratación</h5>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
                 <!-- Gestión de Cargos -->
                 <div class="col-md-4">
                     <a href="cargos" class="text-decoration-none">

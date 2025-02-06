@@ -48,6 +48,7 @@
                             <td>
                                 <a href="contrataciones?action=editar&idContratacion=${contratacion.idContratacion}" class="btn btn-warning btn-sm">Editar</a>
                                 <a href="contrataciones?action=eliminar&idContratacion=${contratacion.idContratacion}" class="btn btn-danger btn-sm">Eliminar</a>
+                                <a href="empleados?action=editar&idEmpleado=${empleado.idEmpleado}" class="btn btn-info btn-sm">Info</a>
                             </td>
                         </tr>
                     </c:forEach>

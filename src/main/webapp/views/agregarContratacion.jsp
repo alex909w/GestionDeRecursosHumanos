@@ -20,21 +20,23 @@
             <input type="hidden" name="action" value="agregar">
 
             <div class="form-group">
+                <label for="idEmpleado">Empleado:</label>
+                <select class="form-control" id="idEmpleado" name="idEmpleado" required>
+                    <option value="" disabled selected>Seleccione un Empleado</option>
+                    <c:forEach var="empleado" items="${empleados}" varStatus="status">
+                        <option value="${empleado.idEmpleado}" ${status.last ? 'selected' : ''}>
+                            ${empleado.nombre} ${empleado.apellido}
+                        </option>
+                    </c:forEach>
+                </select>
+            </div>
+            
+            <div class="form-group">
                 <label for="idDepartamento">Departamento:</label>
                 <select class="form-control" id="idDepartamento" name="idDepartamento" required>
                     <option value="" disabled selected>Seleccione un Departamento</option>
                     <c:forEach var="departamento" items="${departamentos}">
                         <option value="${departamento.idDepartamento}">${departamento.nombreDepartamento}</option>
-                    </c:forEach>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="idEmpleado">Empleado:</label>
-                <select class="form-control" id="idEmpleado" name="idEmpleado" required>
-                    <option value="" disabled selected>Seleccione un Empleado</option>
-                    <c:forEach var="empleado" items="${empleados}">
-                        <option value="${empleado.idEmpleado}">${empleado.nombre} ${empleado.apellido}</option>
                     </c:forEach>
                 </select>
             </div>
