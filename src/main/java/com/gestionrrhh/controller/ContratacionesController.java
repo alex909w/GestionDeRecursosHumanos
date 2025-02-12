@@ -83,7 +83,7 @@ public class ContratacionesController extends HttpServlet {
         request.getRequestDispatcher("/views/listarContrataciones.jsp").forward(request, response);
     }
 
-private void mostrarFormularioAgregar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void mostrarFormularioAgregar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     // Obtener las listas de departamentos, empleados, cargos y tipos de contratación
     List<Departamento> departamentos = contratacionesDAO.obtenerTodosDepartamentos();
     List<Empleado> empleados = contratacionesDAO.obtenerTodosEmpleados();

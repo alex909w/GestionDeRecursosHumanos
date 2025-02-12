@@ -6,6 +6,7 @@
         <meta charset="UTF-8">
         <title>Lista de Contrataciones - Gestión RRHH</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
         <link rel="stylesheet" href="css/styles.css">
     </head>
     <body>
@@ -61,11 +62,11 @@
             </div>
             <!-- Tabla de Contrataciones -->
             <table class="table table-bordered table-striped">
-                <thead>
-                    <tr class="table-dark">
+                <thead class="table-dark">
+                    <tr>
                         <th>ID</th>
-                        <th>Departamento</th>
                         <th>Empleado</th>
+                        <th>Departamento</th>
                         <th>Cargo</th>
                         <th>Tipo Contratación</th>
                         <th>Fecha Contratación</th>
@@ -85,10 +86,16 @@
                             <td>${contratacion.fechaContratacion}</td>
                             <td>${contratacion.salario}</td>
                             <td>${contratacion.estado ? 'Activo' : 'Inactivo'}</td>
-                            <td>
-                                <a href="contrataciones?action=editar&idContratacion=${contratacion.idContratacion}" class="btn btn-warning btn-sm">Editar</a>
-                                <a href="contrataciones?action=eliminar&idContratacion=${contratacion.idContratacion}" class="btn btn-danger btn-sm">Eliminar</a>
-                                <a href="empleados?action=editar&idEmpleado=${empleado.idEmpleado}" class="btn btn-info btn-sm">Info</a>
+                            <td style="width: 15%;">
+                                <a href="contrataciones?action=editar&idContratacion=${contratacion.idContratacion}" class="btn btn-warning btn-sm">
+                                    <i class="bi bi-pencil" data-bs-toggle="tooltip" title="Editar"></i>
+                                </a>
+                                <a href="contrataciones?action=eliminar&idContratacion=${contratacion.idContratacion}" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash" data-bs-toggle="tooltip" title="Eliminar"></i>
+                                </a>
+                                <a href="empleados?action=editar&idEmpleado=${contratacion.idEmpleado}" class="btn btn-info btn-sm">
+                                    <i class="bi bi-info-circle" data-bs-toggle="tooltip" title="Info"></i>
+                                </a>
                             </td>
                         </tr>
                     </c:forEach>

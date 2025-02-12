@@ -6,6 +6,7 @@
         <meta charset="UTF-8">
         <title>Lista de Departamentos - Gestión RRHH</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
         <link rel="stylesheet" href="css/styles.css">
     </head>
     <body>
@@ -20,8 +21,8 @@
             <a href="index.jsp" class="btn btn-secondary mb-3 btn-lg">Volver al Menú Principal</a>
             <!-- Tabla de Departamentos -->
             <table class="table table-bordered table-striped">
-                <thead>
-                    <tr class="table-dark">
+                <thead class="table-dark">
+                    <tr>
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
@@ -34,9 +35,13 @@
                             <td>${departamento.idDepartamento}</td>
                             <td>${departamento.nombreDepartamento}</td>
                             <td>${departamento.descripcionDepartamento}</td>
-                            <td>
-                                <a href="departamentos?action=editar&idDepartamento=${departamento.idDepartamento}" class="btn btn-warning btn-sm">Editar</a>
-                                <a href="departamentos?action=eliminar&idDepartamento=${departamento.idDepartamento}" class="btn btn-danger btn-sm">Eliminar</a>
+                            <td  style="width: 15%;">
+                                <a href="departamentos?action=editar&idDepartamento=${departamento.idDepartamento}" class="btn btn-warning btn-sm">
+                                    <i class="bi bi-pencil" data-bs-toggle="tooltip" title="Editar"></i>
+                                </a>
+                                <a href="departamentos?action=eliminar&idDepartamento=${departamento.idDepartamento}" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash" data-bs-toggle="tooltip" title="Eliminar"></i>
+                                </a>
                             </td>
                         </tr>
                     </c:forEach>
