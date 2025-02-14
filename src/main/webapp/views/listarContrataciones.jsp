@@ -93,7 +93,7 @@
                                 <a href="contrataciones?action=eliminar&idContratacion=${contratacion.idContratacion}" class="btn btn-danger btn-sm">
                                     <i class="bi bi-trash" data-bs-toggle="tooltip" title="Eliminar"></i>
                                 </a>
-                                <a href="empleados?action=editar&idEmpleado=${contratacion.idEmpleado}" class="btn btn-info btn-sm">
+                                <a href="empleados?action=info&idEmpleado=${contratacion.idEmpleado}" class="btn btn-info btn-sm">
                                     <i class="bi bi-info-circle" data-bs-toggle="tooltip" title="Info"></i>
                                 </a>
                             </td>

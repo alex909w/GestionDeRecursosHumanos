@@ -36,6 +36,9 @@ public class EmpleadoController extends HttpServlet {
             case "editar":
                 mostrarFormularioEditar(request, response);
                 break;
+            case "info":
+                infoEmpleado(request, response);
+                break;
             case "eliminar":
                 eliminarEmpleado(request, response);
                 break;
@@ -68,6 +71,21 @@ public class EmpleadoController extends HttpServlet {
         // Pasamos la lista de empleados a la vista JSP
         request.setAttribute("empleados", empleados);
         request.getRequestDispatcher("views/listarEmpleados.jsp").forward(request, response);
+    }
+    
+        private void infoEmpleado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            int idEmpleado = Integer.parseInt(request.getParameter("idEmpleado"));
+            Empleado empleado = empleadoDAO.obtenerEmpleadoPorId(idEmpleado);
+            if (empleado != null) {
+                request.setAttribute("empleado", empleado);
+                request.getRequestDispatcher("/views/infoEmpleado.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("empleados");  // Redirigir si no se encuentra el empleado
+            }
+        } catch (NumberFormatException e) {
+            response.sendRedirect("empleados");  // Redirigir si el ID es inválido
+        }
     }
 
     private void mostrarFormularioAgregar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

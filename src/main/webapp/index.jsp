@@ -26,6 +26,18 @@
         <!-- Contenedor principal -->
         <div class="container mt-5">
             <div class="row g-4">
+                
+                                <!-- Gestión de Contrataciones -->
+                <div class="col-md-4">
+                    <a href="contrataciones" class="text-decoration-none">
+                        <div class="card card-custom shadow-sm p-3">
+                            <div class="card-body text-center">
+                                <i class="bi bi-file-earmark-text fs-1 text-success"></i>
+                                <h5 class="card-title mt-3">Gestión de Contrataciones</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
 
                 <!-- Gestión de Empleados -->
                 <div class="col-md-4">
@@ -46,18 +58,6 @@
                             <div class="card-body text-center">
                                 <i class="bi bi-building fs-1 text-danger"></i>
                                 <h5 class="card-title mt-3">Gestión de Departamentos</h5>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Gestión de Contrataciones -->
-                <div class="col-md-4">
-                    <a href="contrataciones" class="text-decoration-none">
-                        <div class="card card-custom shadow-sm p-3">
-                            <div class="card-body text-center">
-                                <i class="bi bi-file-earmark-text fs-1 text-success"></i>
-                                <h5 class="card-title mt-3">Gestión de Contrataciones</h5>
                             </div>
                         </div>
                     </a>
